@@ -2,24 +2,31 @@
 import requests
 
 # telegram api details
-api_id = 4618509
-api_hash = 'TELEGRAM_API_HASH'
-bot_token = 'TELEGRAM_BOT_TOKEM'
+api_id = 4  # API_ID
+api_hash = ''  # API HASH
+bot_token = ''  # BOT TOKEN
 
 # telegram group conf
-channel_name = 'TELEGRAM_CHANNEL_NAME'
+bot_chatid = ''  # BOT ID
 
 
-def send(message):
+def sendError(message):
+    send_text = 'https://api.telegram.org/bot' \
+                + bot_token + '/sendMessage?chat_id=' + bot_chatid \
+                + '&parse_mode=Markdown&text=' + message
+    requests.get(send_text)
+
+
+def send(message, group_code):
     send_text = 'https://api.telegram.org/bot'\
-                + bot_token + '/sendMessage?chat_id=' + channel_name \
+                + bot_token + '/sendMessage?chat_id=' + group_code \
                 + '&parse_mode=Markdown&text=' + message
 
     requests.get(send_text)
 
 
 def main():
-    print(send('testing'))
+    print(sendError('testing'))
 
 
 if __name__ == '__main__':
